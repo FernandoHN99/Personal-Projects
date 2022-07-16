@@ -12,12 +12,13 @@ public class Usuario {
     public void exibirPerfilDoInvestidor(){
         System.out.print("Usuário: " + this.nome + " --> ");
         if(this.totalPontosUsuario <= Sistema.totalPontosConservador){
-            System.out.println("Perfil Conservador");
+            System.out.print("Perfil Conservador");
         }else if(this.totalPontosUsuario > Sistema.totalPontosConservador && this.totalPontosUsuario <= Sistema.totalPontosModerado){
-            System.out.println("Perfil Moderado");
+            System.out.print("Perfil Moderado");
         }else{
-            System.out.println("Perfil Agressivo");
+            System.out.print("Perfil Agressivo");
         }
+        System.out.println(toString() + "\n");
     }
 
 
@@ -36,7 +37,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [nome=" + nome + ", totalPontosUsuario=" + totalPontosUsuario + "]";
+        return "[totalPontosUsuario=" + totalPontosUsuario + "]";
     }
 
 
