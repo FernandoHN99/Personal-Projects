@@ -1,8 +1,8 @@
 public class Alternativa {
     private String texto;
-    private int pontuacao;
+    private double pontuacao;
 
-    public Alternativa(String texto, int pontuacao) {
+    public Alternativa(String texto, double pontuacao) {
         this.texto = texto;
         this.pontuacao = pontuacao;
     }
@@ -15,11 +15,11 @@ public class Alternativa {
         this.texto = texto;
     }
 
-    public int getPontuacao() {
+    public Double getPontuacao() {
         return pontuacao;
     }
 
-    public void setPontuacao(int pontuacao) {
+    public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;
     }
 

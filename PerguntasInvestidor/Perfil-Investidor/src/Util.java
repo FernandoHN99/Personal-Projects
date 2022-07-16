@@ -7,6 +7,7 @@ public class Util {
         System.out.flush();  
     }  
 
+
     public static Boolean validateString(String value) {
         return value != null && value != "";
     }

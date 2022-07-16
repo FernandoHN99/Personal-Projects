@@ -1,7 +1,7 @@
 public abstract class Questao{
     protected final String pergunta;
     protected final double peso;
-    protected int pontuacaoResposta;
+    protected double pontuacaoResposta;
 
     public Questao(String pergunta, double peso) {
         this.pergunta = pergunta + " ?";
@@ -15,12 +15,8 @@ public abstract class Questao{
         return peso;
     }
 
-    public int getPontuacaoResposta() {
+    public double getPontuacaoResposta() {
         return pontuacaoResposta;
-    }
-
-    public void setPontuacaoResposta(int pontuacaoResposta) {
-        this.pontuacaoResposta = pontuacaoResposta;
     }
     
 }
