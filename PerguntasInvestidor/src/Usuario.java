@@ -17,7 +17,8 @@ public class Usuario {
         }else{
             System.out.print("Perfil Agressivo");
         }
-        System.out.println(toString() + "\n");
+        // System.out.println(toString() + "\n");
+        System.out.println("\n");
     }
 
 
