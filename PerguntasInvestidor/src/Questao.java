@@ -4,7 +4,7 @@ public abstract class Questao{
     protected double pontuacaoResposta;
 
     public Questao(String pergunta, double peso) {
-        this.pergunta = pergunta + " ?";
+        this.pergunta = pergunta + "?";
         this.peso = peso;
     }
 

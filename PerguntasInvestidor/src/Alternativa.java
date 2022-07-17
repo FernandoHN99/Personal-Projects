@@ -2,9 +2,8 @@ public class Alternativa {
     private String texto;
     private double pontuacao;
 
-    public Alternativa(String texto, double pontuacao) {
+    public Alternativa(String texto) {
         this.texto = texto;
-        this.pontuacao = pontuacao;
     }
 
     public String getTexto() {

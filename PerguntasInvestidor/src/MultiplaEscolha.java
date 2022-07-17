@@ -3,9 +3,9 @@ import java.util.*;
 
 public class MultiplaEscolha extends Questao{
     private static final List<String>  listAlternativasSimbolos = Arrays.asList("a","b","c","d","e","f");
-    private double pontosConservador, pontosModerado, pontosAgressivo, media, desvioPadrao;
+    private double pontosConservador, pontosModerado, media, desvioPadrao;
     private ArrayList<Alternativa> listAlternativas = new ArrayList<Alternativa>();
-    private int qtdeAlternativas, indiceResposta; 
+    private int qtdeAlternativas;
 
     public int getQtdeAlternativas() {
         return qtdeAlternativas;
@@ -15,6 +15,7 @@ public class MultiplaEscolha extends Questao{
         super(pergunta, peso);
         this.listAlternativas = listAlternativas;
         this.qtdeAlternativas = this.listAlternativas.size();
+        setDePontosAlternativas();
         setDePontosMultiplaEcolha();
     }
 
@@ -25,12 +26,11 @@ public class MultiplaEscolha extends Questao{
     }
 
 
-    public void desvioPadrarArray(){
+    public void desvioPadraoArray(){
         double auxDesvioPadrao = 0;
         for (Alternativa alternativa : listAlternativas) {
             auxDesvioPadrao += Math.pow(alternativa.getPontuacao() - this.media, 2);
         }
-        
         this.desvioPadrao = Math.sqrt(auxDesvioPadrao / qtdeAlternativas); 
     }
 
@@ -44,29 +44,22 @@ public class MultiplaEscolha extends Questao{
 
     public void setDePontosMultiplaEcolha(){
         mediaArray();
-        desvioPadrarArray();
-        this.pontosConservador = media - desvioPadrao;
-        this.pontosModerado    = media;
-        this.pontosAgressivo   = media + desvioPadrao;
+        desvioPadraoArray();
+        this.pontosConservador = (2*media - desvioPadrao)/2;
+        this.pontosModerado    = (2*media + desvioPadrao)/2;
+    }
+
+    public void setDePontosAlternativas(){
+        for (int i = 0; i < qtdeAlternativas; i++) {
+            this.listAlternativas.get(i).setPontuacao((i+1)*super.peso);
+        }
     }
 
     public ArrayList<Alternativa> getListAlternativas() {
         return listAlternativas;
     }
 
-    public int getIndiceResposta() {
-        return indiceResposta;
-    }
-
-    public void setIndiceResposta(int indiceResposta) {
-        this.indiceResposta = indiceResposta;
-    }
-
     public static List<String> getlistAlternativasSimbolos() {
-        return listAlternativasSimbolos;
-    }
-
-    public static List<String> getListalternativassimbolos() {
         return listAlternativasSimbolos;
     }
 
@@ -78,9 +71,6 @@ public class MultiplaEscolha extends Questao{
         return pontosModerado;
     }
 
-    public double getPontosAgressivo() {
-        return pontosAgressivo;
-    }
 
  
 }

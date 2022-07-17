@@ -1,5 +1,4 @@
 import java.util.*;
-
 public class Usuario {
     private static Scanner input = new Scanner(System.in);
     private String nome;
@@ -27,17 +26,17 @@ public class Usuario {
         questao.mostrarQuestao();
         while(indiceResposta == -1 || (indiceResposta + 1 > questao.getQtdeAlternativas())){
             System.out.println("Digite a alternativa desejada: ");
-            indiceResposta = MultiplaEscolha.getlistAlternativasSimbolos().indexOf(input.next());
+            indiceResposta = MultiplaEscolha.getlistAlternativasSimbolos().indexOf(input.next().toLowerCase());
         }
         // questao.preencherRespostaMultiplaEscolha(indiceResposta);
-        this.totalPontosUsuario = questao.getListAlternativas().get(indiceResposta).getPontuacao();
+        this.totalPontosUsuario += questao.getListAlternativas().get(indiceResposta).getPontuacao();
         Util.clearScreen();
 
     }
 
     @Override
     public String toString() {
-        return "[totalPontosUsuario=" + totalPontosUsuario + "]";
+    return "[totalPontosUsuario= " + totalPontosUsuario +  " totalPontosConservador= " + Sistema.totalPontosConservador + " totalPontosModerado= " + Sistema.totalPontosModerado + "]";
     }
 
 
