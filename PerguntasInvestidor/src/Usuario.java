@@ -5,22 +5,22 @@ public class Usuario {
     private double totalPontosUsuario;
     private EnumPerfis perfil;
 
-    
-
     public Usuario(String nome) {
         this.nome = nome;
     }
 
     public void definirPerfilDoInvestidor(){
-        if(this.totalPontosUsuario <= Formulario.totalPontosConservador){
-            this.perfil = EnumPerfis.CONSERVADOR;
-        }else if(this.totalPontosUsuario > Formulario.totalPontosConservador && this.totalPontosUsuario <= Formulario.totalPontosModerado){
+        if(this.totalPontosUsuario >= Formulario.totalPontosAgressivo){
+            this.perfil = EnumPerfis.AGRESSIVO;
+        }else if(this.totalPontosUsuario >= Formulario.totalpontosModeradoAgressivo){
+            this.perfil = EnumPerfis.MODERADO_AGRESSIVO;
+        }else if(this.totalPontosUsuario >= Formulario.totalPontosModerado){
+            this.perfil = EnumPerfis.MODERADO;
+        }else if(this.totalPontosUsuario >= Formulario.totalPontosConservadorModerado){
+            this.perfil = EnumPerfis.CONSERVADOR_MODERADO;
         }else{
+            this.perfil = EnumPerfis.CONSERVADOR;
         }
-        System.out.print("Perfil Moderado");
-        System.out.print("Perfil Agressivo");
-        System.out.print("Perfil Conservador");
-        System.out.println(toString() + "\n");
     }
 
 
@@ -44,7 +44,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [nome=" + nome + ", totalPontosUsuario=" + totalPontosUsuario + "]";
+        return "Usuario [nome=" + nome + ", perfil=" + perfil + ", totalPontosUsuario=" + totalPontosUsuario + "]\n";
     }
 
 

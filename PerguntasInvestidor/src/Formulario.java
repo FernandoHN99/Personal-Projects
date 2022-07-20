@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Formulario {
     //****************Variaveis statics necessarias administrar questoes ****************
-    public static double totalPontosConservador, totalPontosModerado, totalPontosAgressivo;
+    public static double totalPontosConservador, totalPontosConservadorModerado, totalPontosModerado, totalpontosModeradoAgressivo, totalPontosAgressivo;
     public static final List<String> listAlternativasSimbolos = Arrays.asList("a","b","c","d","e","f");
     private static ArrayList<MultiplaEscolha> listMultiplaEscolhas = new ArrayList<MultiplaEscolha>();
     
@@ -41,14 +41,16 @@ public class Formulario {
         MultiplaEscolha questao3 = new MultiplaEscolha("Quanto de stable coins você possuí em seu portifólio", 1, listAlternativas);
         listMultiplaEscolhas.add(questao3);
         
-        //****************Calculo das Alternativas****************
+        //****************Calculo da Pontuação dos Perfis****************
         calcularPontosParaCadaPerfil();
     }
 
     private static void calcularPontosParaCadaPerfil(){
         for (MultiplaEscolha questao : Formulario.listMultiplaEscolhas){
             totalPontosConservador += questao.getPontosConservador();
+            totalPontosConservadorModerado += questao.getPontosConservadorModerado();
             totalPontosModerado += questao.getPontosModerado();
+            totalpontosModeradoAgressivo += questao.getPontosModeradoAgressivo();
             totalPontosAgressivo += questao.getPontosAgressivo();
         }
     }
@@ -58,6 +60,14 @@ public class Formulario {
             if(user.getTotalPontosUsuario() >= questao.getPontuacaoMinima())
                 user.responderPergunta(questao);
         }
+        user.definirPerfilDoInvestidor();
+    }
+
+    public static String exibirPontosFormulario(){
+        return "Formulario [totalPontosAgressivo=" + totalPontosAgressivo + ", totalPontosConservador="
+                + totalPontosConservador + ", totalPontosConservadorModerado=" + totalPontosConservadorModerado
+                + ", totalPontosModerado=" + totalPontosModerado + ", totalpontosModeradoAgressivo="
+                + totalpontosModeradoAgressivo + "]\n";
     }
 
 }

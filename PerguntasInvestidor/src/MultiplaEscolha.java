@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class MultiplaEscolha extends Questao{
     private ArrayList<Alternativa> listAlternativas = new ArrayList<Alternativa>();
-    private double pontosConservador, pontosConservadorMediano, pontosModerado, pontosAgressivoMediano, pontosAgressivo;
+    private double pontosConservador, pontosConservadorModerado, pontosModerado, pontosModeradoAgressivo, pontosAgressivo;
 
     private int qtdeAlternativas;
 
@@ -51,9 +51,10 @@ public class MultiplaEscolha extends Questao{
     private void setDePontosMultiplaEcolha(){
         double media = calcularMedia();
         double desvioPadrao = calcularDesvioPadrao(media);
-        this.pontosConservador = media - desvioPadrao;
-        this.pontosModerado    = media;
-        this.pontosAgressivo   = media + desvioPadrao;
+        this.pontosConservadorModerado  = media - 2*desvioPadrao;
+        this.pontosModerado             = media - desvioPadrao;
+        this.pontosModeradoAgressivo    = media + desvioPadrao;
+        this.pontosAgressivo            = media + 2*desvioPadrao;
     }
 
     private void setDePontosAlternativas(){
@@ -86,13 +87,14 @@ public class MultiplaEscolha extends Questao{
         return pontuacaoMinima;
     }
 
-    public double getPontosAgressivoMediano() {
-        return pontosAgressivoMediano;
+    public double getPontosModeradoAgressivo() {
+        return pontosModeradoAgressivo;
     }
 
-    public double getPontosConservadorMediano() {
-        return pontosConservadorMediano;
+    public double getPontosConservadorModerado() {
+        return pontosConservadorModerado;
     }
+
 
  
 }

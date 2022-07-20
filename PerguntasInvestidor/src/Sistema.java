@@ -14,8 +14,9 @@ public class Sistema {
         Formulario.iniciarFormulario(user2);
         
         //****************Exibição de Perfil dos Usuários****************
-        user1.exibirPerfilDoInvestidor();
-        user2.exibirPerfilDoInvestidor();
+        System.out.println(user1.toString());
+        System.out.println(user2.toString());
+        System.out.println(Formulario.exibirPontosFormulario());
          
     }
 
