@@ -1,20 +1,27 @@
 import java.util.ArrayList;
-import java.util.*;
 
 public class MultiplaEscolha extends Questao{
-    private static final List<String>  listAlternativasSimbolos = Arrays.asList("a","b","c","d","e","f");
-    private double pontosConservador, pontosModerado, media, desvioPadrao;
     private ArrayList<Alternativa> listAlternativas = new ArrayList<Alternativa>();
-    private int qtdeAlternativas;
+    private double pontosConservador, pontosConservadorMediano, pontosModerado, pontosAgressivoMediano, pontosAgressivo;
 
-    public int getQtdeAlternativas() {
-        return qtdeAlternativas;
-    }
+    private int qtdeAlternativas;
 
     public MultiplaEscolha(String pergunta, double peso, ArrayList<Alternativa> listAlternativas) {
         super(pergunta, peso);
         this.listAlternativas = listAlternativas;
         this.qtdeAlternativas = this.listAlternativas.size();
+        this.pontuacaoMinima = 0;
+        this.pontuacaoMaxima = 999;
+        setDePontosAlternativas();
+        setDePontosMultiplaEcolha();
+    }
+
+    public MultiplaEscolha(String pergunta, double peso, double pontuacaoMinima, double pontuacaoMaxima, ArrayList<Alternativa> listAlternativas) {
+        super(pergunta, peso);
+        this.listAlternativas = listAlternativas;
+        this.qtdeAlternativas = this.listAlternativas.size();
+        super.pontuacaoMinima = pontuacaoMinima;
+        super.pontuacaoMaxima = pontuacaoMaxima;
         setDePontosAlternativas();
         setDePontosMultiplaEcolha();
     }
@@ -22,45 +29,49 @@ public class MultiplaEscolha extends Questao{
     public void mostrarQuestao(){
         System.out.println(super.pergunta);
         for(int i=0; i<listAlternativas.size(); i++)
-            System.out.println(listAlternativasSimbolos.get(i) + "-) " + listAlternativas.get(i).getTexto());
+            System.out.println(Formulario.listAlternativasSimbolos.get(i) + "-) " + listAlternativas.get(i).getTexto());
     }
 
-
-    public void desvioPadraoArray(){
-        double auxDesvioPadrao = 0;
+    private double calcularDesvioPadrao(double media){
+        double desvioPadrao = 0;
         for (Alternativa alternativa : listAlternativas) {
-            auxDesvioPadrao += Math.pow(alternativa.getPontuacao() - this.media, 2);
+            desvioPadrao += Math.pow(alternativa.getPontuacao() - media, 2);
         }
-        this.desvioPadrao = Math.sqrt(auxDesvioPadrao / qtdeAlternativas); 
+        return desvioPadrao = Math.sqrt(desvioPadrao / qtdeAlternativas); 
     }
 
-    public void mediaArray(){
-        double auxMedia = 0;
+    private double calcularMedia(){
+        double media = 0;
         for (Alternativa alternativa : this.listAlternativas) {
-            auxMedia += alternativa.getPontuacao();
+            media += alternativa.getPontuacao();
         }
-        this.media = auxMedia / qtdeAlternativas ;
+        return media = (media/qtdeAlternativas);
     }
 
-    public void setDePontosMultiplaEcolha(){
-        mediaArray();
-        desvioPadraoArray();
-        this.pontosConservador = (2*media - desvioPadrao)/2;
-        this.pontosModerado    = (2*media + desvioPadrao)/2;
+    private void setDePontosMultiplaEcolha(){
+        double media = calcularMedia();
+        double desvioPadrao = calcularDesvioPadrao(media);
+        this.pontosConservador = media - desvioPadrao;
+        this.pontosModerado    = media;
+        this.pontosAgressivo   = media + desvioPadrao;
     }
 
-    public void setDePontosAlternativas(){
+    private void setDePontosAlternativas(){
         for (int i = 0; i < qtdeAlternativas; i++) {
             this.listAlternativas.get(i).setPontuacao((i+1)*super.peso);
         }
     }
 
-    public ArrayList<Alternativa> getListAlternativas() {
-        return listAlternativas;
+    public int getQtdeAlternativas() {
+        return qtdeAlternativas;
     }
 
-    public static List<String> getlistAlternativasSimbolos() {
-        return listAlternativasSimbolos;
+    public double getPontosAgressivo() {
+        return pontosAgressivo;
+    }
+
+    public ArrayList<Alternativa> getListAlternativas() {
+        return listAlternativas;
     }
 
     public double getPontosConservador() {
@@ -71,6 +82,17 @@ public class MultiplaEscolha extends Questao{
         return pontosModerado;
     }
 
+    public double getPontuacaoMinima() {
+        return pontuacaoMinima;
+    }
+
+    public double getPontosAgressivoMediano() {
+        return pontosAgressivoMediano;
+    }
+
+    public double getPontosConservadorMediano() {
+        return pontosConservadorMediano;
+    }
 
  
 }

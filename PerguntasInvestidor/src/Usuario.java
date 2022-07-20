@@ -3,22 +3,24 @@ public class Usuario {
     private static Scanner input = new Scanner(System.in);
     private String nome;
     private double totalPontosUsuario;
+    private EnumPerfis perfil;
+
     
+
     public Usuario(String nome) {
         this.nome = nome;
     }
 
-    public void exibirPerfilDoInvestidor(){
-        System.out.print("Usuário: " + this.nome + " --> ");
-        if(this.totalPontosUsuario <= Sistema.totalPontosConservador){
-            System.out.print("Perfil Conservador");
-        }else if(this.totalPontosUsuario > Sistema.totalPontosConservador && this.totalPontosUsuario <= Sistema.totalPontosModerado){
-            System.out.print("Perfil Moderado");
+    public void definirPerfilDoInvestidor(){
+        if(this.totalPontosUsuario <= Formulario.totalPontosConservador){
+            this.perfil = EnumPerfis.CONSERVADOR;
+        }else if(this.totalPontosUsuario > Formulario.totalPontosConservador && this.totalPontosUsuario <= Formulario.totalPontosModerado){
         }else{
-            System.out.print("Perfil Agressivo");
         }
-        // System.out.println(toString() + "\n");
-        System.out.println("\n");
+        System.out.print("Perfil Moderado");
+        System.out.print("Perfil Agressivo");
+        System.out.print("Perfil Conservador");
+        System.out.println(toString() + "\n");
     }
 
 
@@ -27,7 +29,7 @@ public class Usuario {
         questao.mostrarQuestao();
         while(indiceResposta == -1 || (indiceResposta + 1 > questao.getQtdeAlternativas())){
             System.out.println("Digite a alternativa desejada: ");
-            indiceResposta = MultiplaEscolha.getlistAlternativasSimbolos().indexOf(input.next().toLowerCase());
+            indiceResposta = Formulario.listAlternativasSimbolos.indexOf(input.next().toLowerCase());
         }
         // questao.preencherRespostaMultiplaEscolha(indiceResposta);
         this.totalPontosUsuario += questao.getListAlternativas().get(indiceResposta).getPontuacao();
@@ -35,9 +37,14 @@ public class Usuario {
 
     }
 
+
+    public double getTotalPontosUsuario() {
+        return totalPontosUsuario;
+    }
+
     @Override
     public String toString() {
-    return "[totalPontosUsuario= " + totalPontosUsuario +  " totalPontosConservador= " + Sistema.totalPontosConservador + " totalPontosModerado= " + Sistema.totalPontosModerado + "]";
+        return "Usuario [nome=" + nome + ", totalPontosUsuario=" + totalPontosUsuario + "]";
     }
 
 
